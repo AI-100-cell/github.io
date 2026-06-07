@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanwal Waheed — Cloud & Agentic AI Engineer</title>
+  <meta name="description" content="Cloud & AI Engineer with AWS, Azure, and ML expertise. Transitioning into Agentic AI — building autonomous systems. Open to global opportunities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080c14;
+      --surface: #0f1624;
+      --surface2: #161e30;
+      --border: #1e2d4a;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --accent3: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --success: #10b981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(8,12,20,0.85);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { background: var(--accent); color: #fff !important; padding: 0.45rem 1.1rem; border-radius: 6px; font-weight: 600 !important; }
+    .nav-cta:hover { background: #2563eb !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 4rem; position: relative;
+    }
+    .hero-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 600px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.07) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3);
+      color: #34d399; padding: 0.35rem 1rem; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-badge span { width: 6px; height: 6px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+    h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--muted); max-width: 620px; margin: 0 auto 2.5rem; }
+    .hero-location { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* PHOTO */
+    .hero-photo-wrap { margin-bottom: 1.75rem; position: relative; display: inline-block; }
+    .hero-photo {
+      width: 120px; height: 120px; border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      border: 3px solid rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 6px rgba(59,130,246,0.1), 0 8px 30px rgba(0,0,0,0.5);
+      display: block; cursor: pointer;
+    }
+    .hero-photo-placeholder {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: var(--surface2); border: 2px dashed var(--accent);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hero-photo-placeholder:hover { background: rgba(59,130,246,0.08); }
+    .hero-photo-placeholder span { font-size: 0.6rem; color: var(--accent); margin-top: 0.3rem; letter-spacing: 0.05em; text-transform: uppercase; font-family: 'JetBrains Mono',monospace; }
+    #photo-input { display: none; }
+    /* Save bar */
+    #save-bar {
+      display: none; position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      background: #10b981; color: #fff; padding: 0.75rem 1.5rem;
+      border-radius: 10px; font-weight: 600; font-size: 0.9rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3); cursor: pointer; border: none;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 0.5rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); box-shadow: 0 8px 25px rgba(59,130,246,0.35); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .btn-ghost { background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+    .hero-stats { display: flex; gap: 3rem; justify-content: center; margin-top: 4rem; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
+
+    /* CERT BADGES */
+    .cert-strip {
+      background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem; overflow: hidden; position: relative; z-index: 1;
+    }
+    .cert-strip-label { text-align: center; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .cert-strip-inner { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cert-pill {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--surface2); border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .cert-pill:hover { border-color: var(--accent); }
+    .cert-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; position: relative; z-index: 1; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .section-lead { color: var(--muted); font-size: 1rem; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.85; }
+    .about-text p strong { color: var(--text); }
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+    .highlight-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.2s;
+    }
+    .highlight-card:hover { border-color: var(--accent); }
+    .highlight-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .highlight-card h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 0.15rem; }
+    .highlight-card p { font-size: 0.78rem; color: var(--muted); }
+
+    /* SKILLS */
+    #skills { background: var(--surface); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-category {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .skill-category-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .skill-icon { font-size: 1.4rem; }
+    .skill-category h3 { font-size: 0.9rem; font-weight: 600; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); color: #93c5fd; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.73rem; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+    .tag.purple { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.2); color: #c4b5fd; }
+    .tag.cyan { background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); color: #67e8f9; }
+    .tag.green { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .tag.orange { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #fcd34d; }
+    .tag.new { position: relative; }
+    .tag.new::after { content: 'NEW'; position: absolute; top: -6px; right: -6px; background: var(--accent); color: #fff; font-size: 0.5rem; padding: 1px 4px; border-radius: 3px; font-family: 'Inter', sans-serif; font-weight: 700; }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.75rem; transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.2s; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .project-card:hover::before { opacity: 1; }
+    .project-type { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.75rem; }
+    .project-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .project-tag { background: var(--surface2); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; }
+    .project-links { display: flex; gap: 1rem; }
+    .project-link { font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 0.3rem; }
+    .project-link:hover { text-decoration: underline; }
+
+    /* EXPERIENCE */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot {
+      position: absolute; left: -1.5rem; top: 0.3rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      transform: translateX(-4px);
+    }
+    .timeline-dot.active { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+    .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
+    .timeline-item h3 { font-size: 0.95rem; font-weight: 600; }
+    .timeline-date { font-size: 0.75rem; color: var(--accent); background: rgba(59,130,246,0.1); padding: 0.2rem 0.6rem; border-radius: 4px; white-space: nowrap; }
+    .timeline-org { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.6rem; font-weight: 500; }
+    .timeline-bullets { list-style: none; }
+    .timeline-bullets li { font-size: 0.82rem; color: var(--muted); padding: 0.2rem 0 0.2rem 1rem; position: relative; line-height: 1.6; }
+    .timeline-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* CV */
+    #cv { background: var(--surface); }
+    .cv-wrapper { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .cv-header { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 1.75rem; border-bottom: 1px solid var(--border); }
+    .cv-header-left { display: flex; align-items: center; gap: 0.75rem; }
+    .cv-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .cv-content { padding: 2.5rem; }
+    .cv-name-block { text-align: center; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .cv-name-block h3 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+    .cv-name-block .cv-title { color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; }
+    .cv-contact-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .cv-contact-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--muted); }
+    .cv-contact-item a { color: var(--accent); text-decoration: none; }
+    .cv-two-col { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; }
+    .cv-section { margin-bottom: 2rem; }
+    .cv-section-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+    .cv-skill-row { margin-bottom: 0.65rem; }
+    .cv-skill-name { font-size: 0.78rem; font-weight: 500; margin-bottom: 0.25rem; display: flex; justify-content: space-between; }
+    .cv-skill-level { font-size: 0.7rem; color: var(--muted); }
+    .cv-skill-bar { height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+    .cv-skill-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .cv-item { margin-bottom: 1.25rem; }
+    .cv-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.2rem; gap: 1rem; }
+    .cv-item h4 { font-size: 0.88rem; font-weight: 600; }
+    .cv-date-badge { font-size: 0.7rem; color: var(--accent); background: rgba(59,130,246,0.1); padding: 0.15rem 0.5rem; border-radius: 4px; white-space: nowrap; }
+    .cv-org { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; font-weight: 500; }
+    .cv-item ul { list-style: none; }
+    .cv-item ul li { font-size: 0.78rem; color: var(--muted); padding: 0.15rem 0 0.15rem 1rem; position: relative; line-height: 1.6; }
+    .cv-item ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
+    .cv-cert-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .cv-cert { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.78rem; color: var(--muted); }
+    .cv-cert-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; margin-top: 0.35rem; flex-shrink: 0; }
+    .cv-download-bar { background: var(--surface2); padding: 1rem 1.75rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    .cv-download-bar span { font-size: 0.78rem; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .availability-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #34d399; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 500; margin-bottom: 1.5rem; }
+    .availability-badge span { width: 7px; height: 7px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); transition: all 0.2s; }
+    .contact-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-icon { width: 40px; height: 40px; background: rgba(59,130,246,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-card h4 { font-size: 0.85rem; font-weight: 600; }
+    .contact-card p { font-size: 0.75rem; color: var(--muted); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    label { font-size: 0.78rem; font-weight: 500; color: var(--muted); }
+    input, textarea { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 0.7rem 1rem; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.88rem; transition: border-color 0.2s; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { min-height: 110px; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.8rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .contact-grid, .cv-two-col { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+      .cv-content { padding: 1.5rem; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">kanwal.ai</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div>
+    <div class="hero-photo-wrap">
+      <input type="file" id="photo-input" accept="image/*" />
+      <div class="hero-photo-placeholder" id="photo-placeholder" onclick="document.getElementById('photo-input').click()" title="Click to add your photo">
+        👩‍💻<span>Add photo</span>
+      </div>
+      <img id="hero-img" class="hero-photo" src="" alt="Kanwal Waheed" style="display:none" onclick="document.getElementById('photo-input').click()" title="Click to change photo" />
+    </div>
+    <button id="save-bar" onclick="savePortfolio()">⬇ Save portfolio with photo</button>
+    <div class="hero-badge"><span></span> Open to Global Opportunities · Remote-Ready</div>
+    <div class="hero-location">📍 Islamabad, Pakistan &nbsp;·&nbsp; UTC+5</div>
+    <h1>Kanwal Waheed<br><span class="gradient-text">Cloud & Agentic AI Engineer</span></h1>
+    <p class="hero-sub">Cloud infrastructure architect transitioning into Agentic AI — combining 8+ years of AWS, Azure, and enterprise systems experience with hands-on ML and AI development. I build systems that are both robust <em>and</em> intelligent.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View My Work →</a>
+      <a href="https://github.com/AI-100-cell" target="_blank" class="btn btn-ghost">🐙 GitHub</a>
+      <a href="#cv" class="btn btn-outline">Download CV</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Years in Tech</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Roles Held</div></div>
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Certifications</div></div>
+      <div class="stat"><div class="stat-num">MSCS</div><div class="stat-label">Computer Networks</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERT STRIP -->
+<div class="cert-strip">
+  <div class="cert-strip-label">LinkedIn-Verified Certifications</div>
+  <div class="cert-strip-inner" id="cert-strip">
+    <div class="cert-pill"><div class="cert-dot" style="background:#8b5cf6"></div> Advanced AI · atomcamp 2026 &nbsp;<span style="font-size:0.65rem;color:#a78bfa;font-style:italic">· pending</span></div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#10b981"></div> Gen AI Accelerator Pro · YARRA 2025</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> Hybrid Administrator Associate · Microsoft</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#ff9900"></div> AWS Solutions Architect – Associate</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#ff9900"></div> AWS Partner: Generative AI Sales</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#ff9900"></div> AWS Partner: Sales Accreditation</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#ff9900"></div> AWS Partner: Migration Sales Essentials</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> MCSE · Microsoft</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> MS 365 Certified: Fundamentals</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> Career Essentials in Gen AI · Microsoft</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> Microsoft Exchange Server 2019: Admin</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#0078d4"></div> Microsoft Office 365: Admin</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#607d8b"></div> Cloud & Virtualization · VMware IT Academy</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#1d6996"></div> IBM Cloud Kubernetes Service</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#607d8b"></div> Network Security Baseline</div>
+    <div class="cert-pill"><div class="cert-dot" style="background:#607d8b"></div> CWNA · Corelinks</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container fade-in">
+    <div class="section-tag">// about me</div>
+    <h2>Cloud foundations.<br>AI-driven future.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm <strong>Kanwal Waheed</strong>, a Cloud & AI Engineer based in Islamabad with over 8 years of experience in enterprise IT, cloud infrastructure, and now machine learning. My MSCS thesis on <strong>"Performance Analysis of Application Services in Cloud Computing"</strong> gave me deep insight into cloud-native architectures that directly informs how I approach AI infrastructure today.</p>
+        <p>Currently at <strong>Zones LLC</strong>, I bridge the gap between technical solutions and international clients — translating complex AI and cloud capabilities into business value. I'm now channeling that knowledge into <strong>Agentic AI</strong>, building systems that don't just answer questions but autonomously plan and execute.</p>
+        <p>My unique edge: I understand the <strong>infrastructure that runs AI</strong> — the VPCs, the Kubernetes clusters, the serverless functions — and I know how to build on top of it.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="highlight-icon" style="background:rgba(255,153,0,0.15)">☁️</div>
+          <div><h4>Cloud Infrastructure</h4><p>Deep AWS & Azure experience — EC2, Lambda, RDS, VPC, AKS, Kubernetes. I know where AI models live.</p></div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon" style="background:rgba(59,130,246,0.15)">🤖</div>
+          <div><h4>Machine Learning</h4><p>Building and deploying ML models in Python — classification, survival analysis, FinTech intelligence systems.</p></div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon" style="background:rgba(139,92,246,0.15)">🎯</div>
+          <div><h4>Presales & Tech Strategy</h4><p>Presenting cutting-edge technology to international clients — I understand what recruiters and decision-makers actually need.</p></div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon" style="background:rgba(16,185,129,0.15)">🔒</div>
+          <div><h4>Security-First Mindset</h4><p>EC-Council certified, GDPR trained, cyber security assessment experience — AI systems built responsibly.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container fade-in">
+    <div class="section-tag">// technical skills</div>
+    <h2>What I bring to the table</h2>
+    <p class="section-lead">A rare combination of cloud infrastructure depth and emerging AI/ML skills — ideal for teams building production-grade intelligent systems.</p>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">☁️</span><h3>Cloud Platforms</h3></div>
+        <div class="skill-tags">
+          <span class="tag">AWS EC2</span><span class="tag">S3</span><span class="tag">Lambda</span>
+          <span class="tag">RDS</span><span class="tag">EBS</span><span class="tag">VPC</span>
+          <span class="tag purple">Azure AZ-104</span><span class="tag purple">Azure PaaS/SaaS</span>
+          <span class="tag cyan">IBM Kubernetes</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">🤖</span><h3>Agentic AI & LLMs</h3></div>
+        <div class="skill-tags">
+          <span class="tag green">Claude API</span><span class="tag green">OpenAI API</span>
+          <span class="tag green">LangChain</span><span class="tag green">RAG Pipelines</span>
+          <span class="tag green">CrewAI</span><span class="tag green">Antigravity</span>
+          <span class="tag green">NLP</span><span class="tag green">Prompt Engineering</span>
+          <span class="tag green">AI Agents</span><span class="tag green">APIs Integration</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">🖥️</span><h3>Systems & Infrastructure</h3></div>
+        <div class="skill-tags">
+          <span class="tag">Windows Server</span><span class="tag">Active Directory</span>
+          <span class="tag">Hyper-V</span><span class="tag">DNS / DHCP / VPN</span>
+          <span class="tag">WLAN / LAN</span><span class="tag">Firewall</span>
+          <span class="tag">Remote Desktop</span><span class="tag">OPNET</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">🔒</span><h3>Security & Networking</h3></div>
+        <div class="skill-tags">
+          <span class="tag orange">Cyber Security</span><span class="tag orange">Vulnerability Assessment</span>
+          <span class="tag orange">GDPR / Data Protection</span><span class="tag orange">Network Security</span>
+          <span class="tag orange">IT Governance</span><span class="tag orange">Risk Management</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">🌐</span><h3>Networking Hardware</h3></div>
+        <div class="skill-tags">
+          <span class="tag cyan">HCNA R&S · Huawei</span><span class="tag cyan">WLAN Config</span>
+          <span class="tag cyan">Client-Server Deployment</span><span class="tag cyan">VMware</span>
+          <span class="tag cyan">Hyper-V Virtualisation</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">🛠️</span><h3>Dev Tools & Frameworks</h3></div>
+        <div class="skill-tags">
+          <span class="tag cyan">Python</span><span class="tag cyan">Jupyter Notebook</span>
+          <span class="tag cyan">VS Code</span><span class="tag cyan">Streamlit</span>
+          <span class="tag cyan">ML Classification</span><span class="tag cyan">Data Analysis</span>
+          <span class="tag cyan">Git / GitHub</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header"><span class="skill-icon">📊</span><h3>Research & Communication</h3></div>
+        <div class="skill-tags">
+          <span class="tag purple">Technical Writing</span><span class="tag purple">Research Papers</span>
+          <span class="tag purple">Cloud Thesis (MSCS)</span><span class="tag purple">Social Media Marketing</span>
+          <span class="tag purple">Presales Presentations</span><span class="tag purple">Training Delivery</span>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--muted)">⚡ Skills marked <span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93c5fd;padding:0.15rem 0.4rem;border-radius:3px;font-size:0.7rem;font-family:monospace">NEW</span> reflect current learning & transition into Agentic AI.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container fade-in">
+    <div class="section-tag">// github projects</div>
+    <h2>What I've built</h2>
+    <p class="section-lead">Real projects from my GitHub — spanning ML, FinTech intelligence, and AI-powered research. View all at <a href="https://github.com/AI-100-cell" target="_blank" style="color:var(--accent)">github.com/AI-100-cell</a>.</p>
+    <!-- IN PROGRESS BANNER -->
+    <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0">
+        <span style="width:8px;height:8px;background:#a78bfa;border-radius:50%;animation:pulse 1.5s infinite;display:inline-block"></span>
+        <span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#a78bfa">Currently Building</span>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.6">Multiple Agentic AI projects in active development — including a <strong style="color:var(--text)">Healthcare AI system</strong>, a <strong style="color:var(--text)">Safety AI application</strong>, RAG pipelines, CrewAI multi-agent systems, and Streamlit AI apps. Coming up next: Deep Learning, Convolutional Networks, Power Automate, and MLOps projects. More repos dropping on <a href="https://github.com/AI-100-cell" target="_blank" style="color:#a78bfa">GitHub</a> soon.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-type">Machine Learning · Healthcare</div>
+        <h3>Diabetes Health Indicators ML</h3>
+        <p>Machine learning classification project predicting diabetes risk from health indicators. Implements multiple ML models, feature engineering, and model comparison using real medical datasets.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">Jupyter Notebook</span>
+          <span class="project-tag">Scikit-learn</span><span class="project-tag">Classification</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell/diabetes-health-indicators-ml" target="_blank" class="project-link">→ GitHub Repo</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">AI Research · FinTech</div>
+        <h3>Finance Arc — Economic Intelligence App</h3>
+        <p>Python application built for FinTech research, designed to extract and analyse economic insights from competitor companies. Demonstrates applied AI for financial data intelligence.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">FinTech</span>
+          <span class="project-tag">Data Intelligence</span><span class="project-tag">Research</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell/Finance-arc" target="_blank" class="project-link">→ GitHub Repo</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">Machine Learning · Classic Dataset</div>
+        <h3>Titanic Survival Prediction</h3>
+        <p>Survival analysis ML project on the Titanic dataset. Feature engineering, data preprocessing, and model training — demonstrating foundational ML skills in Python and Jupyter.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">Jupyter Notebook</span>
+          <span class="project-tag">Pandas</span><span class="project-tag">ML Models</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell/Titanic-survival-" target="_blank" class="project-link">→ GitHub Repo</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-type">AI Strategy · IT Solutions</div>
+        <h3>Cutting Collaboration Cost for IT Providers</h3>
+        <p>Python-based research project exploring how AI and smart tooling can reduce collaboration overhead for IT solution providers worldwide — drawing on my direct industry experience at Zones LLC.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">IT Strategy</span>
+          <span class="project-tag">Cost Optimisation</span><span class="project-tag">AI Research</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell/Cutting-collaboration-cost-for-IT-Solution-providers-worldwide" target="_blank" class="project-link">→ GitHub Repo</a>
+        </div>
+      </div>
+
+      <div class="project-card" style="border-color:rgba(16,185,129,0.3)">
+        <div class="project-type" style="color:#10b981">Agentic AI · Healthcare &nbsp;🚧 In Progress</div>
+        <h3>Healthcare AI Agent</h3>
+        <p>Autonomous AI system for healthcare use cases — leveraging LLMs, RAG pipelines, and agentic workflows to assist with clinical decision support, patient data intelligence, and health risk assessment.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">LangChain</span>
+          <span class="project-tag">RAG</span><span class="project-tag">Streamlit</span><span class="project-tag">OpenAI API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell" target="_blank" class="project-link" style="color:#10b981">→ Coming to GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card" style="border-color:rgba(245,158,11,0.3)">
+        <div class="project-type" style="color:#f59e0b">Agentic AI · Safety &nbsp;🚧 In Progress</div>
+        <h3>Safety AI Application</h3>
+        <p>AI-powered safety monitoring and alerting system — using computer vision and multi-agent orchestration to detect hazards, assess risk, and trigger automated safety responses in real-world environments.</p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">CrewAI</span>
+          <span class="project-tag">Computer Vision</span><span class="project-tag">Claude API</span><span class="project-tag">Streamlit</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/AI-100-cell" target="_blank" class="project-link" style="color:#f59e0b">→ Coming to GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container fade-in">
+    <div class="section-tag">// work experience</div>
+    <h2>Career journey</h2>
+    <p class="section-lead">8+ years across enterprise IT, cloud, training, and presales — with increasing AI focus.</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-header">
+          <h3>Advance Artificial Intelligence Trainee</h3>
+          <span class="timeline-date">Jan 2026 — Present</span>
+        </div>
+        <div class="timeline-org">atomcamp · Pakistan &nbsp;·&nbsp; <span style="color:#10b981;font-size:0.75rem;font-weight:600">🏆 Active Training Program</span></div>
+        <ul class="timeline-bullets">
+          <li>Hands-on Advanced AI training covering AI agents, LLMs, and agentic system design</li>
+          <li>Building practical AI solutions including RAG pipelines, CrewAI multi-agent workflows, and Streamlit AI apps</li>
+          <li>Working with Claude API, OpenAI API, LangChain, and agentic frameworks in real-world projects</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-header">
+          <h3>Presales Triage & Tech Support Specialist</h3>
+          <span class="timeline-date">Dec 2020 — Present</span>
+        </div>
+        <div class="timeline-org">Zones LLC · International IT Solutions · Islamabad &nbsp;·&nbsp; <span style="color:#f59e0b;font-size:0.75rem;font-weight:600">🏆 Team Member of the Quarter Q4 2025</span></div>
+        <ul class="timeline-bullets">
+          <li>Define and present latest technology characteristics — including AI/Cloud solutions — to international enterprise clients</li>
+          <li>Play a vital bridge role between the sales and inside solutions departments for complex technical engagements</li>
+          <li>Resolve product-based services according to client-specific needs and requirements</li>
+          <li>Research and evaluate emerging technologies to support presales strategy</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <h3>DIT Trainer</h3>
+          <span class="timeline-date">Aug 2016 — Sep 2017</span>
+        </div>
+        <div class="timeline-org">Farabi Degree College · Peshawar</div>
+        <ul class="timeline-bullets">
+          <li>Conducted role-specific training on tools and programs each team uses daily</li>
+          <li>Delivered organisation-wide trainings on system security best practices</li>
+          <li>Designed and delivered practical IT curricula for diploma-level students</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CV -->
+<section id="cv">
+  <div class="container fade-in">
+    <div class="section-tag">// curriculum vitae</div>
+    <h2>Full CV</h2>
+    <p class="section-lead">Click "Print / Save as PDF" to export as a clean document.</p>
+    <div class="cv-wrapper">
+      <div class="cv-header">
+        <div class="cv-header-left">
+          <div class="cv-dot" style="background:#ef4444"></div>
+          <div class="cv-dot" style="background:#f59e0b"></div>
+          <div class="cv-dot" style="background:#10b981"></div>
+          <span style="font-size:0.78rem;color:var(--muted);margin-left:0.5rem">kanwal_waheed_cv.pdf</span>
+        </div>
+        <button class="btn btn-primary" onclick="window.print()" style="font-size:0.78rem;padding:0.4rem 1rem">⬇ Download PDF</button>
+      </div>
+
+      <div class="cv-content">
+        <!-- NAME BLOCK -->
+        <div class="cv-name-block">
+          <h3>Kanwal Waheed</h3>
+          <p class="cv-title">Cloud & Agentic AI Engineer</p>
+          <div class="cv-contact-row">
+            <span class="cv-contact-item">📧 <a href="mailto:kanwalwaheed24@gmail.com">kanwalwaheed24@gmail.com</a></span>
+            <span class="cv-contact-item">📱 +92 315 998 1300</span>
+            <span class="cv-contact-item">📍 Islamabad, Pakistan</span>
+            <span class="cv-contact-item">💼 <a href="https://linkedin.com/in/kanwal-waheed-477673120" target="_blank">LinkedIn</a></span>
+            <span class="cv-contact-item">🐙 <a href="https://github.com/AI-100-cell" target="_blank">GitHub: AI-100-cell</a></span>
+          </div>
+        </div>
+
+        <div class="cv-two-col">
+          <!-- LEFT -->
+          <div>
+            <div class="cv-section">
+              <div class="cv-section-title">Core Skills</div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>AWS Cloud Services</span><span class="cv-skill-level">Expert</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:90%"></div></div>
+              </div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>Microsoft Azure</span><span class="cv-skill-level">Advanced</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:85%"></div></div>
+              </div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>Windows Server / AD</span><span class="cv-skill-level">Expert</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:92%"></div></div>
+              </div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>Python / ML</span><span class="cv-skill-level">Intermediate</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:70%"></div></div>
+              </div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>AI / Agentic Systems</span><span class="cv-skill-level">Growing</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:55%"></div></div>
+              </div>
+              <div class="cv-skill-row">
+                <div class="cv-skill-name"><span>Network & Security</span><span class="cv-skill-level">Advanced</span></div>
+                <div class="cv-skill-bar"><div class="cv-skill-fill" style="width:80%"></div></div>
+              </div>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">Education</div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>MSCS — Computer Networks</h4></div>
+                <div class="cv-org">University of Agriculture, Peshawar</div>
+                <ul><li>Thesis: "An Efficient Secure Method for Performance Analysis of Application Services in Cloud Computing"</li></ul>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>BSCS</h4></div>
+                <div class="cv-org">Abdul Wali Khan University, Mardan</div>
+                <ul><li>Project: GSM Based Telemetry System</li></ul>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>HSSC</h4></div>
+                <div class="cv-org">BISE Mardan · Computer, Physics, Maths</div>
+              </div>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">Certifications</div>
+              <div class="cv-cert-list">
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#10b981"></div><span>Gen AI Accelerator Pro · YARRA (AiForAll Technologies) · Nov 2025</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Microsoft Certified: Windows Server Hybrid Administrator Associate · Nov 2024 – Nov 2026</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#ff9900"></div><span>AWS Certified Solutions Architect – Associate · Mar 2024 – Mar 2027</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#ff9900"></div><span>AWS Partner: Generative AI Sales 2024 – Specialized · Sep 2024</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#ff9900"></div><span>AWS Partner: Sales Accreditation · Nov 2024</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#ff9900"></div><span>AWS Partner: Migration Sales Essentials 2024 · Mar 2024</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Microsoft Certified Solutions Expert (MCSE) · Oct 2019</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Microsoft 365 Certified: Fundamentals · Dec 2023</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Career Essentials in Generative AI · Microsoft & LinkedIn · Jul 2023</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Microsoft Exchange Server 2019: Administration</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#0078d4"></div><span>Microsoft Office 365: Administration</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>IT Academy: Cloud and Virtualization Concepts · VMware · Aug 2023</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#1d6996"></div><span>IBM Cloud Kubernetes Service · Apr 2020</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>Certified Wireless Network Administrator (CWNA) · Corelinks · Oct 2019</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>Network Security Baseline · KPCERC</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>IT Governance and Risk Management · KPCERC</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>Data Protection / Intro to GDPR · KPCERC</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot" style="background:#607d8b"></div><span>HCNA R&S – Huawei</span></div>
+              </div>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">Training</div>
+              <div class="cv-cert-list">
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>Microsoft Certified Solution Expert</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>Cyber Security & Vulnerability Assessment (KPITB)</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>IT Governance & Risk Management (KPITB)</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>Data Protection / Intro to GDPR (KPITB)</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>Network Security Baseline (KPITB)</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>Digital Marketing (KPITB)</span></div>
+                <div class="cv-cert"><div class="cv-cert-dot"></div><span>VMware Certified Professional</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div>
+            <div class="cv-section">
+              <div class="cv-section-title">Professional Summary</div>
+              <p style="font-size:0.82rem;color:var(--muted);line-height:1.85">Cloud & AI Engineer with 8+ years spanning enterprise infrastructure, cloud architecture (AWS, Azure), and emerging machine learning. MSCS-qualified with a thesis on cloud computing performance. Currently at Zones LLC delivering technology solutions to international clients, and actively transitioning into Agentic AI — building autonomous systems on top of solid cloud and systems foundations. Open to remote and global opportunities.</p>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">Work Experience</div>
+              <div class="cv-item">
+                <div class="cv-item-header">
+                  <h4>Presales Triage & Tech Support Specialist</h4>
+                  <span class="cv-date-badge">Dec 2020 – Present</span>
+                </div>
+                <div class="cv-org">Zones LLC · Islamabad</div>
+                <ul>
+                  <li>Present and define latest technology (AI, cloud, networking) to international enterprise clients</li>
+                  <li>Bridge sales and inside solutions departments for complex technical engagements</li>
+                  <li>Resolve product-based services tailored to global client requirements</li>
+                </ul>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-header">
+                  <h4>DIT Trainer</h4>
+                  <span class="cv-date-badge">Aug 2016 – Sep 2017</span>
+                </div>
+                <div class="cv-org">Farabi Degree College · Peshawar</div>
+                <ul>
+                  <li>Role-specific training on daily tools and programs</li>
+                  <li>Organisation-wide system security training</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">GitHub Projects</div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>Diabetes Health Indicators ML</h4><span class="cv-date-badge">2024–25</span></div>
+                <ul><li>ML classification pipeline in Python/Jupyter for diabetes risk prediction</li></ul>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>Finance Arc — FinTech Intelligence App</h4><span class="cv-date-badge">2026</span></div>
+                <ul><li>Python app for economic insights and competitor analysis in FinTech sector</li></ul>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-header"><h4>Cutting Collaboration Cost for IT Providers</h4><span class="cv-date-badge">2026</span></div>
+                <ul><li>Research + Python project on AI-driven cost optimisation for IT solution companies</li></ul>
+              </div>
+            </div>
+
+            <div class="cv-section">
+              <div class="cv-section-title">Technical Skills</div>
+              <p style="font-size:0.78rem;color:var(--muted);line-height:1.8">
+                <strong style="color:var(--text)">Agentic AI:</strong> Claude API · RAG Pipelines · CrewAI · Antigravity · Prompt Engineering · Agentic Workflows<br>
+                <strong style="color:var(--text)">Dev Tools:</strong> Python · Jupyter · VS Code · Streamlit · Git / GitHub · Scikit-learn<br>
+                <strong style="color:var(--text)">Cloud:</strong> AWS (EC2, S3, EBS, RDS, Lambda, VPC) · Azure (AZ-104) · IBM Kubernetes · VMware<br>
+                <strong style="color:var(--text)">Infrastructure:</strong> Windows Server · Active Directory · Hyper-V · DNS · DHCP · VPN · Firewall<br>
+                <strong style="color:var(--text)">Networking:</strong> WLAN · LAN · HCNA R&S · Client-Server Deployment · OPNET
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cv-download-bar">
+        <span>Kanwal Waheed · kanwalwaheed24@gmail.com · Islamabad, Pakistan · June 2026</span>
+        <button class="btn btn-outline" onclick="window.print()" style="font-size:0.78rem;padding:0.4rem 1rem">Print / Save as PDF</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container fade-in">
+    <div class="section-tag">// get in touch</div>
+    <h2>Let's work together</h2>
+    <div class="contact-grid">
+      <div>
+        <div class="availability-badge"><span></span> Available for global remote roles now</div>
+        <p style="color:var(--muted);margin-bottom:2rem;line-height:1.85;font-size:0.92rem">Whether you're hiring for an Agentic AI, Cloud AI, or ML Engineering role — or looking for someone who can bridge infrastructure and intelligence — I'd love to hear from you. I'm remote-ready and open worldwide.</p>
+        <div class="contact-cards">
+          <a href="mailto:kanwalwaheed24@gmail.com" class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div><h4>Email</h4><p>kanwalwaheed24@gmail.com</p></div>
+          </a>
+          <a href="https://linkedin.com/in/kanwal-waheed-477673120" target="_blank" class="contact-card">
+            <div class="contact-icon">💼</div>
+            <div><h4>LinkedIn</h4><p>linkedin.com/in/kanwal-waheed-477673120</p></div>
+          </a>
+          <a href="https://github.com/AI-
